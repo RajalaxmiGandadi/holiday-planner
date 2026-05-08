@@ -22,8 +22,13 @@ public class GeminiService {
     private final RestTemplate restTemplate;
     private final ObjectMapper objectMapper = new ObjectMapper();
 
-    private static final String GEMINI_URL =
-            "https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=";
+    private static final String BASE_URL = "https://generativelanguage.googleapis.com/v1beta/models/";
+    private static final String[] MODELS = {
+        "gemini-3-flash-preview",
+        "gemini-2.5-flash",
+        "gemini-2.0-flash",
+        "gemini-1.5-flash"
+    };
 
     public GeminiService(RestTemplate restTemplate) {
         this.restTemplate = restTemplate;
@@ -31,7 +36,6 @@ public class GeminiService {
 
     public HolidayResponseDto generateHolidayPlan(SearchRequestDto req) {
         String prompt = buildPrompt(req);
-
         String requestBody = """
             {
               "contents": [{
@@ -48,26 +52,36 @@ public class GeminiService {
         headers.setAcceptCharset(List.of(java.nio.charset.StandardCharsets.UTF_8));
         HttpEntity<String> entity = new HttpEntity<>(requestBody, headers);
 
-        try {
-            ResponseEntity<byte[]> response = restTemplate.exchange(
-                    GEMINI_URL + apiKey,
-                    HttpMethod.POST,
-                    entity,
-                    byte[].class
-            );
+        Exception lastException = null;
+        for (String model : MODELS) {
+            try {
+                String url = BASE_URL + model + ":generateContent?key=" + apiKey;
+                ResponseEntity<byte[]> response = restTemplate.exchange(
+                        url,
+                        HttpMethod.POST,
+                        entity,
+                        byte[].class
+                );
 
-            String body = new String(response.getBody(), java.nio.charset.StandardCharsets.UTF_8);
-            JsonNode root = objectMapper.readTree(body);
-            String jsonText = root
-                    .path("candidates").get(0)
-                    .path("content").path("parts").get(0)
-                    .path("text").asText();
+                String body = new String(response.getBody(), java.nio.charset.StandardCharsets.UTF_8);
+                JsonNode root = objectMapper.readTree(body);
+                String jsonText = root
+                        .path("candidates").get(0)
+                        .path("content").path("parts").get(0)
+                        .path("text").asText();
 
-            return parseResponse(jsonText, req.getDestinationCity());
+                return parseResponse(jsonText, req.getDestinationCity());
 
-        } catch (Exception e) {
-            throw new RuntimeException("Failed to call Gemini API: " + e.getMessage(), e);
+            } catch (org.springframework.web.client.HttpClientErrorException.TooManyRequests e) {
+                System.out.println("Rate limit hit for model " + model + ", trying next one...");
+                lastException = e;
+            } catch (Exception e) {
+                System.err.println("Error with model " + model + ": " + e.getMessage());
+                lastException = e;
+            }
         }
+        
+        throw new RuntimeException("All Gemini models failed. Last error: " + (lastException != null ? lastException.getMessage() : "Unknown"), lastException);
     }
 
     private String buildPrompt(SearchRequestDto req) {
@@ -125,9 +139,9 @@ public class GeminiService {
             }
 
             Requirements:
-            - Include at least 3 flight options
-            - Include at least 3 hotel options
-            - Include at least 4 top attractions that match the "%s" vibe
+            - Include at least 7 flight options
+            - Include at least 7 hotel options
+            - Include at least 7 top attractions that match the "%s" vibe
             - All prices must be in Indian Rupees (₹)
             - Use real airline names that actually fly the %s to %s route
             - Use real hotel names in %s

@@ -135,25 +135,7 @@ export default function Dashboard() {
             </div>
           </div>
 
-          {/* Budget Slider */}
-          <div className="space-y-4 pt-2">
-            <div className="flex justify-between items-center text-sm font-semibold text-slate-700">
-               <span className="flex items-center gap-2"><Wallet size={16} className="text-green-500" /> Style</span>
-            </div>
-            <div className="flex justify-between text-xs text-slate-500 mb-2 font-medium">
-              <span>Hostel/Backpacker</span>
-              <span>Luxury/Boutique</span>
-            </div>
-            <input 
-              type="range" 
-              name="budget"
-              min="1" 
-              max="100" 
-              value={formData.budget}
-              onChange={handleChange}
-              className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-indigo-600"
-            />
-          </div>
+
 
           <div className="pt-6 flex flex-col sm:flex-row gap-4">
             <button 
