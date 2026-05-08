@@ -17,15 +17,7 @@ export default function Results() {
     const fetchData = async () => {
       setLoading(true);
       try {
-        let endpoint = "/api/search";
         let body = searchData;
-
-        if (searchData.surprise) {
-            // Get a surprise destination first
-            const surpriseRes = await fetch("/api/ai/surprise-me");
-            const surpriseData = await surpriseRes.json();
-            body = { ...searchData, destinationCity: surpriseData.destinationCity, vibe: surpriseData.vibe };
-        }
 
         const response = await fetch("/api/search", {
           method: "POST",

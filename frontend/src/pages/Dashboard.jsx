@@ -25,14 +25,7 @@ export default function Dashboard() {
     navigate("/results", { state: formData });
   };
 
-  const handleSurpriseMe = () => {
-    // Generate random values for surprise me
-    const vibes = ["Relaxed", "Adventure", "Budget-Friendly"];
-    const randomVibe = vibes[Math.floor(Math.random() * vibes.length)];
-    
-    // Pass to results page - the results page will trigger the AI backend to get the real surprise destination
-    navigate("/results", { state: { ...formData, vibe: randomVibe, surprise: true } });
-  };
+
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-indigo-100 via-purple-50 to-teal-50 flex items-center justify-center p-4 sm:p-8 relative overflow-hidden">
@@ -168,13 +161,6 @@ export default function Dashboard() {
               className="flex-1 bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-bold py-4 px-8 rounded-xl shadow-lg shadow-indigo-200 hover:shadow-indigo-300 transform hover:-translate-y-1 transition-all flex items-center justify-center gap-2"
             >
               Search
-            </button>
-            <button 
-              type="button"
-              onClick={handleSurpriseMe}
-              className="flex-none bg-white text-indigo-600 font-bold py-4 px-8 rounded-xl border border-indigo-100 shadow-md hover:bg-indigo-50 transform hover:-translate-y-1 transition-all flex items-center justify-center gap-2"
-            >
-              <Sparkles size={20} className="text-indigo-500" /> Surprise Me
             </button>
           </div>
         </form>

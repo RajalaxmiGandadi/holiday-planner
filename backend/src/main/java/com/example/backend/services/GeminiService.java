@@ -125,9 +125,9 @@ public class GeminiService {
             }
 
             Requirements:
-            - Include exactly 3 flight options
-            - Include exactly 3 hotel options
-            - Include exactly 4 top attractions that match the "%s" vibe
+            - Include at least 3 flight options
+            - Include at least 3 hotel options
+            - Include at least 4 top attractions that match the "%s" vibe
             - All prices must be in Indian Rupees (₹)
             - Use real airline names that actually fly the %s to %s route
             - Use real hotel names in %s

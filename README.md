@@ -7,7 +7,6 @@ A modern, full-stack travel planning application that uses **Google Gemini 3 Fla
 - **Dynamic Results**: Interactive UI showing weather details, transport options, and "Where to stay".
 - **AI Packing List**: Dynamically generated packing checklists based on the destination and weather.
 - **Interactive Links**: Click on any hotel or attraction to visit their official website or Wikipedia page.
-- **Surprise Me**: Let the AI pick a trending destination for you!
 
 ---
 
