@@ -1,19 +1,42 @@
 # 🌴 Holiday Planner - AI Powered Travel Assistant
 
-A modern, full-stack travel planning application that uses **Google Gemini 3 Flash** to generate personalized, real-time holiday itineraries, hotel recommendations, and flight options based on your preferences.
+A modern, full-stack travel planning application that uses **Google Gemini AI** to generate personalized, real-time holiday itineraries, hotel recommendations, and flight options.
 
-## 🚀 Features
-- **AI-Powered Search**: Get real airline routes, hotels, and attractions tailored to your "vibe" and budget.
-- **Dynamic Results**: Interactive UI showing weather details, transport options, and "Where to stay".
-- **AI Packing List**: Dynamically generated packing checklists based on the destination and weather.
-- **Interactive Links**: Click on any hotel or attraction to visit their official website or Wikipedia page.
+## 🚀 Current Features (Phase 1)
+- **AI-Powered Search**: Generates real airline routes, hotels, and attractions based on starting city, destination, and travel dates.
+- **Rich Data Sets**: Every search provides at least **7+ options** for flights, hotels, and top attractions to ensure a wide variety of choices.
+- **Premium UI Experience**:
+  - **Horizontal Hotel Slider**: Smooth horizontal scrolling for premium accommodations.
+  - **Flight Sidebar**: Dedicated scrollable section for easy transport comparison.
+  - **3-Column Attraction Grid**: Beautifully displayed local sights with descriptions and images.
+- **Weather Insights**: Real-time weather summaries for the destination during travel dates.
+- **Interactive Links**: Direct links to official websites or Wikipedia for all hotels and attractions.
+- **Smart Model Fallback**: Backend system that automatically switches between multiple Gemini models (3-flash, 2.5-flash, etc.) to handle rate limits and ensure high availability.
+
+---
+
+## 🔮 Phase 2 Roadmap (Upcoming Improvements)
+
+We have exciting plans to make the Holiday Planner even more comprehensive:
+
+### 🌟 New Features
+- **"Surprise Me" Button**: Let the AI choose a trending destination for you based on current travel trends.
+- **Travel Style Slider**: Fine-tune your budget and luxury preferences (from Backpacker to Ultra-Luxury).
+- **Recommended Packing List**: AI-generated checklists tailored specifically to your destination's weather and your travel vibe.
+
+### 🚆 Transportation Enhancements
+- **Multi-Mode Travel**: Support for Trains, Buses, and Local Communication options (Metro, Cabs, etc.).
+- **Round-Trip Planning**: Integrated onward and return travel options in a single view.
+
+### 📅 Itinerary Deep-Dive
+- **Personalized Daily Itineraries**: Hour-by-hour travel schedules generated based on your specific interests and preferences.
 
 ---
 
 ## 🛠️ Tech Stack
 - **Frontend**: React.js, Vite, Tailwind CSS (v4), Lucide Icons.
-- **Backend**: Java 17, Spring Boot 4, Spring Data JPA (H2 In-Memory DB).
-- **AI Engine**: Google Gemini 3 Flash (via Google AI Studio).
+- **Backend**: Java 17, Spring Boot 4, Spring Data JPA.
+- **AI Engine**: Google Gemini (3-Flash, 2.5-Flash, 2.0-Flash fallback system).
 
 ---
 
@@ -22,7 +45,7 @@ A modern, full-stack travel planning application that uses **Google Gemini 3 Fla
 ### Prerequisites
 - **Java 17** or higher.
 - **Node.js** (v18+) and **npm**.
-- **Gemini API Key**: Get it for free at [aistudio.google.com](https://aistudio.google.com/apikey).
+- **Gemini API Key**: Obtain from [aistudio.google.com](https://aistudio.google.com/apikey).
 
 ---
 
@@ -35,7 +58,7 @@ A modern, full-stack travel planning application that uses **Google Gemini 3 Fla
    ```properties
    gemini.api.key=YOUR_ACTUAL_API_KEY_HERE
    ```
-3. Run the application using Gradle:
+3. Run the application:
    ```bash
    # Windows
    .\gradlew.bat bootRun
@@ -43,7 +66,6 @@ A modern, full-stack travel planning application that uses **Google Gemini 3 Fla
    # macOS/Linux
    ./gradlew bootRun
    ```
-The backend will start on [http://localhost:8080](http://localhost:8080).
 
 ---
 
@@ -52,22 +74,11 @@ The backend will start on [http://localhost:8080](http://localhost:8080).
    ```bash
    cd frontend
    ```
-2. Install dependencies:
+2. Install dependencies and start:
    ```bash
    npm install
-   ```
-3. Start the development server:
-   ```bash
    npm run dev
    ```
-The frontend will start on [http://localhost:5173](http://localhost:5173).
-
----
-
-## 🌐 Deployment Notes
-- **API Proxy**: The frontend uses a Vite proxy (defined in `vite.config.js`) to redirect `/api` calls to `http://localhost:8080`.
-- **CORS**: The backend is configured to allow requests from the frontend origin.
-- **Database**: Uses an H2 in-memory database for demonstration purposes (no external DB setup required).
 
 ## 📄 License
-MIT License - Feel free to use this for your own projects!
+MIT License
