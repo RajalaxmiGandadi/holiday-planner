@@ -15,70 +15,48 @@ A modern, full-stack travel planning application that uses **Google Gemini AI** 
 
 ---
 
-## 🔮 Phase 2 Roadmap (Upcoming Improvements)
+## 🌍 Deployment (Free Tier)
 
-We have exciting plans to make the Holiday Planner even more comprehensive:
+For a free and easy experiment, I recommend using **Render**.
 
-### 🌟 New Features
-- **"Surprise Me" Button**: Let the AI choose a trending destination for you based on current travel trends.
-- **Travel Style Slider**: Fine-tune your budget and luxury preferences (from Backpacker to Ultra-Luxury).
-- **Recommended Packing List**: AI-generated checklists tailored specifically to your destination's weather and your travel vibe.
+### 1. Backend (Spring Boot)
+- **Host on**: [Render](https://render.com/) (Web Service).
+- **Environment Variable**: Set `GEMINI_API_KEY` to your Gemini key in the Render dashboard.
+- **Build Command**: `./gradlew build -x test`
+- **Start Command**: `java -jar build/libs/*.jar` (or use the provided `Dockerfile`).
 
-### 🚆 Transportation Enhancements
-- **Multi-Mode Travel**: Support for Trains, Buses, and Local Communication options (Metro, Cabs, etc.).
-- **Round-Trip Planning**: Integrated onward and return travel options in a single view.
-
-### 📅 Itinerary Deep-Dive
-- **Personalized Daily Itineraries**: Hour-by-hour travel schedules generated based on your specific interests and preferences.
-
----
-
-## 🛠️ Tech Stack
-- **Frontend**: React.js, Vite, Tailwind CSS (v4), Lucide Icons.
-- **Backend**: Java 17, Spring Boot 4, Spring Data JPA.
-- **AI Engine**: Google Gemini (3-Flash, 2.5-Flash, 2.0-Flash fallback system).
+### 2. Frontend (React)
+- **Host on**: [Render](https://render.com/) or [Vercel](https://vercel.com/) (Static Site).
+- **Environment Variable**: Set `VITE_API_BASE_URL` to your production backend URL (e.g., `https://your-backend.onrender.com`).
+- **Build Command**: `npm run build`
+- **Publish Directory**: `dist`
 
 ---
 
-## 🚦 Getting Started
+## 🚦 Local Setup
 
 ### Prerequisites
 - **Java 17** or higher.
 - **Node.js** (v18+) and **npm**.
 - **Gemini API Key**: Obtain from [aistudio.google.com](https://aistudio.google.com/apikey).
 
----
+### 1. Backend Setup
+1. Navigate to `backend`.
+2. Run: `./gradlew bootRun`
+3. (Optional) Set `GEMINI_API_KEY` as an environment variable.
 
-### 1. Backend Setup (Spring Boot)
-1. Navigate to the backend directory:
-   ```bash
-   cd backend
-   ```
-2. Open `src/main/resources/application.properties` and add your Gemini API Key:
-   ```properties
-   gemini.api.key=YOUR_ACTUAL_API_KEY_HERE
-   ```
-3. Run the application:
-   ```bash
-   # Windows
-   .\gradlew.bat bootRun
-
-   # macOS/Linux
-   ./gradlew bootRun
-   ```
+### 2. Frontend Setup
+1. Navigate to `frontend`.
+2. Run: `npm install` and `npm run dev`.
 
 ---
 
-### 2. Frontend Setup (React + Vite)
-1. Navigate to the frontend directory:
-   ```bash
-   cd frontend
-   ```
-2. Install dependencies and start:
-   ```bash
-   npm install
-   npm run dev
-   ```
+## 🔮 Phase 2 Roadmap
+- **"Surprise Me" Button**: AI-picked trending destinations.
+- **Travel Style Slider**: Fine-tune budget (Backpacker to Ultra-Luxury).
+- **Recommended Packing List**: AI-generated checklists.
+- **Multi-Mode Travel**: Support for Trains, Buses, and Local Communication.
+- **Personalized Daily Itineraries**: Hour-by-hour travel schedules.
 
 ## 📄 License
 MIT License
