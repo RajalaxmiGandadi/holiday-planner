@@ -1,7 +1,8 @@
 # Build stage
 FROM eclipse-temurin:17-jdk-alpine AS build
 WORKDIR /app
-COPY . .
+# Copy the backend folder contents to the container's /app
+COPY backend/ . 
 RUN ./gradlew build -x test --no-daemon
 
 # Run stage
