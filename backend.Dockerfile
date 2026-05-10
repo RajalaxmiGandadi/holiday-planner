@@ -9,6 +9,7 @@ RUN ./gradlew build -x test --no-daemon
 # Run stage
 FROM eclipse-temurin:17-jre-alpine
 WORKDIR /app
-COPY --from=build /app/build/libs/*.jar app.jar
+# Copy the executable jar (ignoring the 'plain' jar)
+COPY --from=build /app/build/libs/*[!p][!l][!a][!i][!n].jar app.jar
 EXPOSE 8080
 ENTRYPOINT ["java", "-Dserver.port=${PORT:-8080}", "-jar", "app.jar"]
